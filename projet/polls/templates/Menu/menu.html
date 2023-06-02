@@ -1,0 +1,48 @@
+<nav>
+  <ul>
+      <li><a href="{% url 'index' %}">Accueil</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'cart' %}">Panier</a></li>
+          <li><a href="{% url 'logout' %}">Se déconnecter</a></li>
+          <li class="menu-right">Bienvenue, {{ user.username }}</li>
+      {% else %}
+          <li><a href="{% url 'login' %}">Connexion</a></li>
+          <li><a href="{% url 'register' %}">Inscription</a></li>
+          <li class="menu-right">Pour accéder au panier, veuillez vous connecter</li>
+      {% endif %}
+  </ul>
+</nav>
+<style>
+  nav {
+      background-color: #333;
+  }
+
+  nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+  }
+
+  nav li {
+      float: left;
+  }
+
+  nav li a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+  }
+
+  nav li a:hover {
+      background-color: #555;
+  }
+
+  .menu-right {
+      float: right;
+      line-height: 50px;
+      padding-right: 20px;
+      color: #fff;
+  }
+</style>

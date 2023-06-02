@@ -1,0 +1,79 @@
+{% include 'Menu/menu.html' %}
+{% block content %}
+<h2>Nos produits</h2>
+<div class="product-list">
+  {% for product in products %}
+    <div class="product-card">
+      <img src="{{ product.image.url }}" alt="{{ product.name }} Image" class="product-image">
+      <h3>{{ product.name }}</h3>
+      <p class="product-price">{{ product.price }}</p>
+      <p>{{ product.description }}</p>
+      <form method="POST" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+        <div class="quantity-input">
+          <input type="number" name="quantity" value="1" min="1">
+          <button type="submit" class="add-to-cart-btn">Ajouter au panier</button>
+        </div>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+
+
+<style>
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-card {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .quantity-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-input input {
+    width: 50px;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #45a049;
+  }
+
+
+
+
+
+
+
